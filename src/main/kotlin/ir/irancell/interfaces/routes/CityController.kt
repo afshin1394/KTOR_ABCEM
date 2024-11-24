@@ -6,6 +6,5 @@ fun Route.cityRoutes(
 
 ) {
     route("/city") {
-
     }
 }

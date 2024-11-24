@@ -1,4 +1,4 @@
-package ir.irancell.infrastructure.orm
+package ir.irancell.infrastructure.database
 
 import kotlinx.coroutines.*
 import kotlinx.serialization.Serializable
