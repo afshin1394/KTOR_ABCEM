@@ -36,38 +36,13 @@ fun Application.configureFrameworks() {
         repositoryModule,
         databaseModule
     )
-
     install(Koin) {
         slf4jLogger()
         modules(appModules)
     }
-    checkSpecificKoinObject()
-    checkSpecificKoinObject2()
-
 
 }
 
 
 
 
-fun Application.checkSpecificKoinObject() {
-    val koin = getKoin()
-
-    try {
-        val readDatabase = koin.get<Database>(qualifier = named("readDatabase"))
-        log.info("Read Database exists and is configured: $readDatabase")
-    } catch (e: NoBeanDefFoundException) {
-        log.error("Read Database object not found in Koin.")
-    }
-}
-
-fun Application.checkSpecificKoinObject2() {
-    val koin = getKoin()
-
-    try {
-        val readDatabase = koin.get<IUserService>()
-        log.info("Read Database exists and is configured: $readDatabase")
-    } catch (e: NoBeanDefFoundException) {
-        log.error("Read Database object not found in Koin.")
-    }
-}
