@@ -11,6 +11,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21"
 }
 
+
 group = "ir.irancell"
 version = "0.0.1"
 
@@ -23,9 +24,10 @@ application {
 
 repositories {
     mavenCentral()
-    }
+}
 
 dependencies {
+    implementation("redis.clients:jedis:4.0.1")
     implementation("io.ktor:ktor-server-core-jvm")
     implementation("io.ktor:ktor-server-sessions-jvm")
     implementation("io.ktor:ktor-server-auth-jvm")
@@ -53,3 +55,5 @@ dependencies {
     implementation("com.zaxxer:HikariCP:6.2.1")
     testImplementation("io.mockk:mockk:1.13.5")
 }
+
+

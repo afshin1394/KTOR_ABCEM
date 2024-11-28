@@ -10,5 +10,5 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
     single<IUserWriteRepository> { UserWriteRepositoryImpl(get(named("writeDatabase"))) }
-    single<IUserReadRepository> { UserReadRepositoryImpl(get(named("readDatabase"))) }
+    single<IUserReadRepository> { UserReadRepositoryImpl(get()) }
 }

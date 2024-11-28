@@ -8,7 +8,6 @@ import org.koin.dsl.module
 val serviceModule = module {
 
 
-       single<IUserService> {   IUserServiceImpl(get())   }
-       single<IUserService> {   IUserServiceImpl(get())   }
+       single<IUserService> {   IUserServiceImpl(get(),get())   }
 
 }

@@ -4,23 +4,23 @@ import ir.irancell.application.commands.batch_user.BatchInsertCommand
 import ir.irancell.application.commands.batch_user.BatchInsertCommandHandler
 import ir.irancell.application.commands.create_user.CreateUserCommand
 import ir.irancell.application.commands.create_user.CreateUserCommandHandler
+import ir.irancell.application.queries.GetAllUsersQuery
+import ir.irancell.application.queries.GetAllUsersQueryHandler
 import ir.irancell.application.shared.CommandDispatcher
-import ir.irancell.application.shared.CommandHandler
+import ir.irancell.application.shared.QueryDispatcher
 import org.koin.dsl.module
 
 
 val cqrsModule = module {
 
-    single<CommandHandler<CreateUserCommand>> { CreateUserCommandHandler(get()) }
-    single<CommandHandler<BatchInsertCommand>> { BatchInsertCommandHandler(get()) }
 
+    // Registering Command Handlers
+    single { CommandDispatcher().apply {
+        registerHandler(CreateUserCommand::class, CreateUserCommandHandler(get()))
+        registerHandler(BatchInsertCommand::class, BatchInsertCommandHandler(get()))
+    } }
 
-    single {
-        CommandDispatcher(
-            mapOf(
-                CreateUserCommand::class to get<CommandHandler<CreateUserCommand>>(),
-                BatchInsertCommand::class to get<CommandHandler<BatchInsertCommand>>(),
-            )
-        )
-    }
+    single { QueryDispatcher().apply {
+        registerHandler(GetAllUsersQuery::class, GetAllUsersQueryHandler(get()))
+    } }
 }

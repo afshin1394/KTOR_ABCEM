@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Application API</title>
+  <title>abcem API</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8" />
@@ -689,6 +689,18 @@
   <script>
     // Script section to load models into a JS Var
     var defs = {}
+            defs["Unit"] = {
+  "properties" : { }
+};
+            defs["UserDTO"] = {
+  "required" : [ "name" ],
+  "properties" : {
+    "name" : { },
+    "age" : {
+      "format" : "int32"
+    }
+  }
+};
   </script>
 
   <div class="container-fluid">
@@ -706,8 +718,17 @@
             <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
                   <li class="nav-header" data-group="Default"><a href="#api-Default">API Methods - Default</a></li>
-                    <li data-group="Default" data-name="rootGet" class="">
-                      <a href="#api-Default-rootGet">rootGet</a>
+                    <li data-group="Default" data-name="apiUsersCreatePost" class="">
+                      <a href="#api-Default-apiUsersCreatePost">apiUsersCreatePost</a>
+                    </li>
+                    <li data-group="Default" data-name="apiUsersGetAllGet" class="">
+                      <a href="#api-Default-apiUsersGetAllGet">apiUsersGetAllGet</a>
+                    </li>
+                    <li data-group="Default" data-name="apiUsersInsertAllPost" class="">
+                      <a href="#api-Default-apiUsersInsertAllPost">apiUsersInsertAllPost</a>
+                    </li>
+                    <li data-group="Default" data-name="sessionIncrementGet" class="">
+                      <a href="#api-Default-sessionIncrementGet">sessionIncrementGet</a>
                     </li>
           </ul>
         </nav>
@@ -715,58 +736,366 @@
       <div id="content">
         <div id="project">
           <div class="pull-left">
-            <h1>Application API</h1>
+            <h1>abcem API</h1>
           </div>
           <div class="clearfix"></div>
         </div>
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
-              <div class="app-desc">Version: 1.0.1</div>
+              <div class="app-desc">Version: 1.0.0</div>
             <hr>
-            <div>Application API</div>
+            <div>abcem API</div>
           </div>
         </div>
         <div id="sections">
                 <section id="api-Default">
                   <h1>Default</h1>
-                    <div id="api-Default-rootGet">
-                      <article id="api-Default-rootGet-0" data-group="User" data-name="rootGet" data-version="0">
+                    <div id="api-Default-apiUsersCreatePost">
+                      <article id="api-Default-apiUsersCreatePost-0" data-group="User" data-name="apiUsersCreatePost" data-version="0">
                         <div class="pull-left">
-                          <h1>rootGet</h1>
+                          <h1>apiUsersCreatePost</h1>
                           <p></p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked">Hello World!</p>
+                        <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/api/users/create</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Default-rootGet-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Default-rootGet-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Default-rootGet-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Default-rootGet-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Default-rootGet-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Default-rootGet-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Default-rootGet-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Default-rootGet-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Default-rootGet-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Default-rootGet-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Default-rootGet-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-Default-apiUsersCreatePost-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersCreatePost-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersCreatePost-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-apiUsersCreatePost-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-apiUsersCreatePost-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersCreatePost-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-apiUsersCreatePost-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-apiUsersCreatePost-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersCreatePost-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersCreatePost-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersCreatePost-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Default-rootGet-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: text/plain"\
-"http://0.0.0.0/"</code></pre>
+                          <div class="tab-pane active" id="examples-Default-apiUsersCreatePost-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Accept: */*"\
+-H "Content-Type: application/json"\
+"http://localhost/api/users/create"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-Default-rootGet-0-java">
+                          <div class="tab-pane" id="examples-Default-apiUsersCreatePost-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        UserDTO body = ; // UserDTO | 
+        try {
+            Unit result = apiInstance.apiUsersCreatePost(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#apiUsersCreatePost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-apiUsersCreatePost-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        UserDTO body = ; // UserDTO | 
+        try {
+            Unit result = apiInstance.apiUsersCreatePost(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#apiUsersCreatePost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-apiUsersCreatePost-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-apiUsersCreatePost-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">UserDTO *body = ; // 
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+[apiInstance apiUsersCreatePostWith:body
+              completionHandler: ^(Unit output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-apiUsersCreatePost-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var AbcemApi = require('abcem_api');
+
+var api = new AbcemApi.DefaultApi()
+var body = ; // {{UserDTO}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.apiUsersCreatePost(body, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-apiUsersCreatePost-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-apiUsersCreatePost-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class apiUsersCreatePostExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var body = new UserDTO(); // UserDTO | 
+
+            try
+            {
+                Unit result = apiInstance.apiUsersCreatePost(body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.apiUsersCreatePost: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-apiUsersCreatePost-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$body = ; // UserDTO | 
+
+try {
+    $result = $api_instance->apiUsersCreatePost($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->apiUsersCreatePost: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-apiUsersCreatePost-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $body = WWW::SwaggerClient::Object::UserDTO->new(); # UserDTO | 
+
+eval { 
+    my $result = $api_instance->apiUsersCreatePost(body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->apiUsersCreatePost: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-apiUsersCreatePost-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+body =  # UserDTO | 
+
+try: 
+    api_response = api_instance.api_users_create_post(body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->apiUsersCreatePost: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/UserDTO"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_apiUsersCreatePost_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_apiUsersCreatePost_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 201 - Created </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-apiUsersCreatePost-201-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-apiUsersCreatePost-201-schema">
+                                  <div id='responses-apiUsersCreatePost-201-schema-201' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Created",
+  "content" : {
+    "*/*" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Unit"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["*/*"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-apiUsersCreatePost-201-schema-data').val(stringify(schema));
+                                        var result = $('#responses-apiUsersCreatePost-201-schema-201');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-apiUsersCreatePost-201-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-apiUsersGetAllGet">
+                      <article id="api-Default-apiUsersGetAllGet-0" data-group="User" data-name="apiUsersGetAllGet" data-version="0">
+                        <div class="pull-left">
+                          <h1>apiUsersGetAllGet</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/api/users/getAll</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-apiUsersGetAllGet-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersGetAllGet-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersGetAllGet-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-apiUsersGetAllGet-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-apiUsersGetAllGet-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersGetAllGet-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-apiUsersGetAllGet-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-apiUsersGetAllGet-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersGetAllGet-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersGetAllGet-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersGetAllGet-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-apiUsersGetAllGet-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+-H "Accept: */*"\
+"http://localhost/api/users/getAll"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-apiUsersGetAllGet-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
@@ -781,17 +1110,16 @@ public class DefaultApiExample {
         
         DefaultApi apiInstance = new DefaultApi();
         try {
-            'String' result = apiInstance.rootGet();
-            System.out.println(result);
+            apiInstance.apiUsersGetAllGet();
         } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#rootGet");
+            System.err.println("Exception when calling DefaultApi#apiUsersGetAllGet");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-Default-rootGet-0-android">
+                          <div class="tab-pane" id="examples-Default-apiUsersGetAllGet-0-android">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
 
 public class DefaultApiExample {
@@ -799,28 +1127,24 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
         try {
-            'String' result = apiInstance.rootGet();
-            System.out.println(result);
+            apiInstance.apiUsersGetAllGet();
         } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#rootGet");
+            System.err.println("Exception when calling DefaultApi#apiUsersGetAllGet");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-Default-rootGet-0-groovy">
+  <div class="tab-pane" id="examples-Default-apiUsersGetAllGet-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-Default-rootGet-0-objc">
+                            <div class="tab-pane" id="examples-Default-apiUsersGetAllGet-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
-[apiInstance rootGetWithCompletionHandler: 
-              ^('String' output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
+[apiInstance apiUsersGetAllGetWithCompletionHandler: 
+              ^(NSError* error) {
                             if (error) {
                                 NSLog(@"Error: %@", error);
                             }
@@ -828,25 +1152,25 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-rootGet-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var ApplicationApi = require('application_api');
+                            <div class="tab-pane" id="examples-Default-apiUsersGetAllGet-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var AbcemApi = require('abcem_api');
 
-var api = new ApplicationApi.DefaultApi()
+var api = new AbcemApi.DefaultApi()
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully. Returned data: ' + data);
+    console.log('API called successfully.');
   }
 };
-api.rootGet(callback);
+api.apiUsersGetAllGet(callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-Default-rootGet-0-angular">
+                            <!--<div class="tab-pane" id="examples-Default-apiUsersGetAllGet-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-Default-rootGet-0-csharp">
+                            <div class="tab-pane" id="examples-Default-apiUsersGetAllGet-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -855,7 +1179,7 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class rootGetExample
+    public class apiUsersGetAllGetExample
     {
         public void main()
         {
@@ -864,12 +1188,11 @@ namespace Example
 
             try
             {
-                'String' result = apiInstance.rootGet();
-                Debug.WriteLine(result);
+                apiInstance.apiUsersGetAllGet();
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling DefaultApi.rootGet: " + e.Message );
+                Debug.Print("Exception when calling DefaultApi.apiUsersGetAllGet: " + e.Message );
             }
         }
     }
@@ -877,22 +1200,21 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-rootGet-0-php">
+                            <div class="tab-pane" id="examples-Default-apiUsersGetAllGet-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
 
 try {
-    $result = $api_instance->rootGet();
-    print_r($result);
+    $api_instance->apiUsersGetAllGet();
 } catch (Exception $e) {
-    echo 'Exception when calling DefaultApi->rootGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling DefaultApi->apiUsersGetAllGet: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-rootGet-0-perl">
+                            <div class="tab-pane" id="examples-Default-apiUsersGetAllGet-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::DefaultApi;
@@ -900,15 +1222,14 @@ use WWW::SwaggerClient::DefaultApi;
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
 
 eval { 
-    my $result = $api_instance->rootGet();
-    print Dumper($result);
+    $api_instance->apiUsersGetAllGet();
 };
 if ($@) {
-    warn "Exception when calling DefaultApi->rootGet: $@\n";
+    warn "Exception when calling DefaultApi->apiUsersGetAllGet: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-rootGet-0-python">
+                            <div class="tab-pane" id="examples-Default-apiUsersGetAllGet-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -919,10 +1240,9 @@ from pprint import pprint
 api_instance = swagger_client.DefaultApi()
 
 try: 
-    api_response = api_instance.root_get()
-    pprint(api_response)
+    api_instance.api_users_get_all_get()
 except ApiException as e:
-    print("Exception when calling DefaultApi->rootGet: %s\n" % e)</code></pre>
+    print("Exception when calling DefaultApi->apiUsersGetAllGet: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
@@ -938,14 +1258,621 @@ except ApiException as e:
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-rootGet-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-apiUsersGetAllGet-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-rootGet-200-schema">
-                                  <div id='responses-rootGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-apiUsersGetAllGet-200-schema">
+                                  <div id='responses-apiUsersGetAllGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "*/*" : {
+      "schema" : {
+        "items" : {
+          "$ref" : "#/components/schemas/UserDTO"
+        },
+        "x-content-type" : "*/*"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["*/*"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-apiUsersGetAllGet-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-apiUsersGetAllGet-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-apiUsersGetAllGet-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-apiUsersInsertAllPost">
+                      <article id="api-Default-apiUsersInsertAllPost-0" data-group="User" data-name="apiUsersInsertAllPost" data-version="0">
+                        <div class="pull-left">
+                          <h1>apiUsersInsertAllPost</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/api/users/insertAll</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-apiUsersInsertAllPost-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersInsertAllPost-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersInsertAllPost-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-apiUsersInsertAllPost-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-apiUsersInsertAllPost-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersInsertAllPost-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-apiUsersInsertAllPost-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-apiUsersInsertAllPost-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersInsertAllPost-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersInsertAllPost-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-apiUsersInsertAllPost-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-apiUsersInsertAllPost-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Accept: */*"\
+-H "Content-Type: application/json"\
+"http://localhost/api/users/insertAll"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-apiUsersInsertAllPost-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+         body = ; //  | 
+        try {
+            Unit result = apiInstance.apiUsersInsertAllPost(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#apiUsersInsertAllPost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-apiUsersInsertAllPost-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+         body = ; //  | 
+        try {
+            Unit result = apiInstance.apiUsersInsertAllPost(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#apiUsersInsertAllPost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-apiUsersInsertAllPost-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-apiUsersInsertAllPost-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp"> *body = ; // 
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+[apiInstance apiUsersInsertAllPostWith:body
+              completionHandler: ^(Unit output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-apiUsersInsertAllPost-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var AbcemApi = require('abcem_api');
+
+var api = new AbcemApi.DefaultApi()
+var body = ; // {{}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.apiUsersInsertAllPost(body, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-apiUsersInsertAllPost-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-apiUsersInsertAllPost-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class apiUsersInsertAllPostExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+            var body = new (); //  | 
+
+            try
+            {
+                Unit result = apiInstance.apiUsersInsertAllPost(body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.apiUsersInsertAllPost: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-apiUsersInsertAllPost-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$body = ; //  | 
+
+try {
+    $result = $api_instance->apiUsersInsertAllPost($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->apiUsersInsertAllPost: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-apiUsersInsertAllPost-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $body = WWW::SwaggerClient::Object::->new(); #  | 
+
+eval { 
+    my $result = $api_instance->apiUsersInsertAllPost(body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->apiUsersInsertAllPost: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-apiUsersInsertAllPost-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+body =  #  | 
+
+try: 
+    api_response = api_instance.api_users_insert_all_post(body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->apiUsersInsertAllPost: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "items" : {
+          "$ref" : "#/components/schemas/UserDTO"
+        }
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_apiUsersInsertAllPost_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_apiUsersInsertAllPost_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 201 - Created </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-apiUsersInsertAllPost-201-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-apiUsersInsertAllPost-201-schema">
+                                  <div id='responses-apiUsersInsertAllPost-201-schema-201' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Created",
+  "content" : {
+    "*/*" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Unit"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["*/*"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-apiUsersInsertAllPost-201-schema-data').val(stringify(schema));
+                                        var result = $('#responses-apiUsersInsertAllPost-201-schema-201');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-apiUsersInsertAllPost-201-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 400 - Bad Request </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-apiUsersInsertAllPost-400-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-apiUsersInsertAllPost-400-schema">
+                                  <div id='responses-apiUsersInsertAllPost-400-schema-400' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Bad Request",
+  "content" : {
+    "*/*" : {
+      "schema" : {
+        "x-content-type" : "*/*"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["*/*"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-apiUsersInsertAllPost-400-schema-data').val(stringify(schema));
+                                        var result = $('#responses-apiUsersInsertAllPost-400-schema-400');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-apiUsersInsertAllPost-400-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-sessionIncrementGet">
+                      <article id="api-Default-sessionIncrementGet-0" data-group="User" data-name="sessionIncrementGet" data-version="0">
+                        <div class="pull-left">
+                          <h1>sessionIncrementGet</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/session/increment</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-sessionIncrementGet-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-sessionIncrementGet-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-sessionIncrementGet-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-sessionIncrementGet-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-sessionIncrementGet-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-sessionIncrementGet-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-sessionIncrementGet-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-sessionIncrementGet-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-sessionIncrementGet-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-sessionIncrementGet-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-sessionIncrementGet-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-sessionIncrementGet-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+-H "Accept: text/plain"\
+"http://localhost/session/increment"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-sessionIncrementGet-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        
+        DefaultApi apiInstance = new DefaultApi();
+        try {
+            apiInstance.sessionIncrementGet();
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#sessionIncrementGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-sessionIncrementGet-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        try {
+            apiInstance.sessionIncrementGet();
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#sessionIncrementGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-sessionIncrementGet-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-sessionIncrementGet-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+[apiInstance sessionIncrementGetWithCompletionHandler: 
+              ^(NSError* error) {
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-sessionIncrementGet-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var AbcemApi = require('abcem_api');
+
+var api = new AbcemApi.DefaultApi()
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+};
+api.sessionIncrementGet(callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-sessionIncrementGet-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-sessionIncrementGet-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class sessionIncrementGetExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new DefaultApi();
+
+            try
+            {
+                apiInstance.sessionIncrementGet();
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.sessionIncrementGet: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-sessionIncrementGet-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+
+try {
+    $api_instance->sessionIncrementGet();
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->sessionIncrementGet: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-sessionIncrementGet-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+
+eval { 
+    $api_instance->sessionIncrementGet();
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->sessionIncrementGet: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-sessionIncrementGet-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+
+try: 
+    api_instance.session_increment_get()
+except ApiException as e:
+    print("Exception when calling DefaultApi->sessionIncrementGet: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-sessionIncrementGet-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-sessionIncrementGet-200-schema">
+                                  <div id='responses-sessionIncrementGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -953,12 +1880,11 @@ except ApiException as e:
   "content" : {
     "text/plain" : {
       "schema" : {
-        "type" : "string",
         "x-content-type" : "text/plain"
       },
       "examples" : {
         "Example#1" : {
-          "value" : "Hello World!"
+          "value" : ""
         }
       }
     }
@@ -977,14 +1903,14 @@ except ApiException as e:
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-rootGet-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-rootGet-200-schema-200');
+                                        $('#responses-sessionIncrementGet-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-sessionIncrementGet-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-rootGet-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-sessionIncrementGet-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 

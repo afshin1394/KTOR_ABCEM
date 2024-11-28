@@ -1,13 +1,14 @@
 package ir.irancell.infrastructure.shared
 
+import io.ktor.websocket.*
+import ir.irancell.application.shared.CacheUtil
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.ColumnType
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.transactions.transaction
-import java.sql.PreparedStatement
 
 fun Table.nvarchar(name: String, length: Int): Column<String> =
     registerColumn(name, NVarcharColumnType(length))
@@ -24,14 +25,17 @@ class NVarcharColumnType(private val length: Int) : ColumnType<String>() {
     }
 }
 suspend fun <T> dbTransaction(database: Database,block: () -> T): T {
-    // Run the database operation in a transaction
-    return transaction(database) { block() }
+    // Execute the transaction in an IO-optimized context
+    return withContext(Dispatchers.IO) {
+        transaction(database) {
+            block()
+
+        }
+
+    }
 }
 
 
-suspend fun <T> dbQuery(database: Database,block: () -> T): T {
-    // Run the database operation in a transaction
-    return transaction(database) { block() }
-}
+
 
 

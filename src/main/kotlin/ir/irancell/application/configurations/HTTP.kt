@@ -1,31 +1,31 @@
 package ir.irancell.application.configurations
 
 import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
+import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
-import io.ktor.server.plugins.httpsredirect.*
-import io.ktor.server.plugins.openapi.*
-import io.ktor.server.plugins.swagger.*
-import io.ktor.server.routing.*
+import kotlinx.serialization.json.Json
+
 
 fun Application.configureHTTP() {
     install(CORS) {
+        anyHost() // Allows all origins (for development). Use cautiously in production!
+        allowMethod(HttpMethod.Get)
+        allowMethod(HttpMethod.Post)
         allowMethod(HttpMethod.Options)
-        allowMethod(HttpMethod.Put)
-        allowMethod(HttpMethod.Delete)
-        allowMethod(HttpMethod.Patch)
-        allowHeader(HttpHeaders.Authorization)
-        anyHost()
-        allowHeader(HttpHeaders.ContentType)
+        allowHeader("Content-Type")
+        allowHeader("Authorization")
+        allowCredentials = true // If cookies or credentials are needed
     }
+
+
 //    install(HttpsRedirect) {
 //        // The port to redirect to. By default 443, the default HTTPS port.
 //        sslPort = 443
 //        // 301 Moved Permanently, or 302 Found redirect.
 //        permanentRedirect = true
 //    }
-
-
 
 
 //    install(SimpleCache) {

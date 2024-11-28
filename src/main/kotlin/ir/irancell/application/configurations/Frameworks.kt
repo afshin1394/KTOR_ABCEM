@@ -1,45 +1,35 @@
 package ir.irancell.application.configurations
 
-import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.server.plugins.openapi.*
-import io.ktor.server.plugins.swagger.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
-import io.ktor.util.reflect.*
-import ir.irancell.application.commands.create_user.CreateUserCommand
-import ir.irancell.application.services.interfaces.IUserService
-import ir.irancell.application.shared.CommandHandler
-import ir.irancell.di.cqrsModule
-import ir.irancell.di.databaseModule
-import ir.irancell.di.repositoryModule
-import ir.irancell.di.serviceModule
-import ir.irancell.domain.repositories.IWriteRepository
-import ir.irancell.domain.repositories.write.IUserWriteRepository
-import ir.irancell.interfaces.apiModule
-import org.jetbrains.exposed.sql.Database
-import org.koin.core.annotation.KoinInternalApi
-import org.koin.core.error.NoBeanDefFoundException
-import org.koin.core.qualifier.named
+import ir.irancell.application.shared.CacheUtil
+import ir.irancell.di.*
+import ir.irancell.infrastructure.startRedisHealthChecker
 import org.koin.dsl.module
+import org.koin.ktor.ext.getKoin
 import org.koin.ktor.plugin.Koin
 import org.koin.logger.slf4jLogger
-import org.koin.mp.KoinPlatform.getKoin
 
 fun Application.configureFrameworks() {
     val appModules = listOf(
+        jedisModule,
+        transactionModule,
         module {
             single { this@configureFrameworks }
         },
         serviceModule,
         cqrsModule,
         repositoryModule,
-        databaseModule
-    )
+        logModule,
+        databaseModule,
+
+        )
+
     install(Koin) {
         slf4jLogger()
         modules(appModules)
+
     }
+
 
 }
 

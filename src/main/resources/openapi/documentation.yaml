@@ -1,14 +1,15 @@
-openapi: "3.0.3"
+openapi: "3.1.0"
 info:
-  title: "Application API"
-  description: "Application API"
-  version: "1.0.1"
+  title: "abcem API"
+  description: "abcem API"
+  version: "1.0.0"
 servers:
-  - url: "http://0.0.0.0"
+  - url: "http://localhost"
+  - url: "https://localhost"
 paths:
-  /:
+  /session/increment:
     get:
-      description: "Hello World!"
+      description: ""
       responses:
         "200":
           description: "OK"
@@ -18,6 +19,71 @@ paths:
                 type: "string"
               examples:
                 Example#1:
-                  value: "Hello World!"
+                  value: ""
+  /api/users/create:
+    post:
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "201":
+          description: "Created"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Unit"
+  /api/users/getAll:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/UserDTO"
+  /api/users/insertAll:
+    post:
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "201":
+          description: "Created"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Unit"
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "string"
 components:
-  schemas: { }
+  schemas:
+    UserDTO:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        age:
+          type: "integer"
+          format: "int32"
+      required:
+      - "name"
+    Unit:
+      type: "object"
+      properties: {}

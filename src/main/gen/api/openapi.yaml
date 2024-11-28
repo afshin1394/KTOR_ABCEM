@@ -1,26 +1,120 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
-  description: Application API
-  title: Application API
-  version: 1.0.1
+  description: abcem API
+  title: abcem API
+  version: 1.0.0
 servers:
-- url: http://0.0.0.0:8080
+- url: http://localhost/api/
+- url: https://localhost/api/
 paths:
-  /:
+  /json/kotlinx-serialization:
     get:
-      description: Hello World!
+      description: ""
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Map_String'
+          description: OK
+      x-accepts:
+      - '*/*'
+  /session/increment:
+    get:
+      description: ""
       responses:
         "200":
           content:
             text/plain:
               examples:
                 Example#1:
-                  value: Hello World!
+                  value: ""
+              schema:
+                type: string
+          description: OK
+      x-accepts:
+      - text/plain
+  /users/create:
+    post:
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequestDTO'
+        required: true
+      responses:
+        "201":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Unit'
+          description: Created
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /users/insertAll:
+    post:
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/UserRequestDTO'
+              type: array
+        required: true
+      responses:
+        "201":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Unit'
+          description: Created
+        "400":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: Bad Request
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /users/salam:
+    get:
+      description: ""
+      responses:
+        "200":
+          content:
+            text/plain:
+              examples:
+                Example#1:
+                  value: salam
               schema:
                 type: string
           description: OK
       x-accepts:
       - text/plain
 components:
-  schemas: {}
+  schemas:
+    Map:
+      properties: {}
+      type: object
+    Map_String:
+      type: string
+    UserRequestDTO:
+      example:
+        name: name
+        age: 0
+      properties:
+        name:
+          type: string
+        age:
+          format: int32
+          type: integer
+      required:
+      - name
+    Unit:
+      properties: {}
+      type: object
 

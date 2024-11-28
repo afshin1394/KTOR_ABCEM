@@ -4,13 +4,13 @@ import ir.irancell.domain.models.UserDomain
 import ir.irancell.domain.repositories.write.IUserReadRepository
 import ir.irancell.infrastructure.database.UsersTable
 import ir.irancell.infrastructure.shared.AbstractReadDatabaseRepository
-import org.jetbrains.exposed.sql.Database
+import ir.irancell.infrastructure.shared.DBQuery
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.statements.InsertStatement
 import java.util.UUID
 
-class UserReadRepositoryImpl(readDataBase: Database) : AbstractReadDatabaseRepository<UserDomain, UUID>(database = readDataBase,table = UsersTable, idColumn = UsersTable.id),
+class UserReadRepositoryImpl(dbQuery: DBQuery) : AbstractReadDatabaseRepository<UserDomain, UUID>(dbQuery = dbQuery,table = UsersTable, idColumn = UsersTable.id, kSerializer = UserDomain.serializer()),
     IUserReadRepository {
     override fun toEntity(row: ResultRow): UserDomain {
         return UserDomain(
