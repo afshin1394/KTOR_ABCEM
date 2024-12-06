@@ -1,8 +1,9 @@
-package ir.irancell.di
+package ir.irancell.infrastructure.di
 
 import com.zaxxer.hikari.HikariDataSource
 import ir.irancell.infrastructure.DatabaseFactory
 import org.jetbrains.exposed.sql.Database
+
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import org.koin.dsl.onClose
@@ -10,10 +11,10 @@ import org.koin.dsl.onClose
 
 val databaseModule = module {
     // Write Database (Primary)
-    val url= "jdbc:postgresql://localhost/abcem_database"
-    val user= "postgres"
-    val password= "afshin1994"
-    val driver= "org.postgresql.Driver"
+    val url = "jdbc:postgresql://localhost/abcem_database"
+    val user = "postgres"
+    val password = "afshin1994"
+    val driver = "org.postgresql.Driver"
     single<HikariDataSource>(qualifier = named("writeDatabase")) {
 //        val environment = get<Application>().environment
 //        val jdbcUrl = environment.config.property("postgres.command.url").getString()
@@ -26,7 +27,7 @@ val databaseModule = module {
             driverClassName = driver,
             username = user,
             password = password,
-            )
+        )
     }.also { factory ->
         factory.onClose { it?.close() }
     }
@@ -55,4 +56,8 @@ val databaseModule = module {
     single<Database>(qualifier = named("readDatabase")) {
         DatabaseFactory.connect(get(named("readDatabase")))
     }
+
 }
+
+
+

@@ -1,4 +1,4 @@
-package ir.irancell.di
+package ir.irancell.infrastructure.di
 
 import ir.irancell.application.commands.batch_user.BatchInsertCommand
 import ir.irancell.application.commands.batch_user.BatchInsertCommandHandler
@@ -12,10 +12,8 @@ import org.koin.dsl.module
 
 
 val cqrsModule = module {
-
-
     // Registering Command Handlers
-    single { CommandDispatcher().apply {
+    single { CommandDispatcher(get()).apply {
         registerHandler(CreateUserCommand::class, CreateUserCommandHandler(get()))
         registerHandler(BatchInsertCommand::class, BatchInsertCommandHandler(get()))
     } }

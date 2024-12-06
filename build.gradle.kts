@@ -4,6 +4,9 @@ val koin_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
 val postgres_version: String by project
+val prometheus_version: String by project
+val jedis_version: String by project
+val kafka_version: String by project
 
 plugins {
     kotlin("jvm") version "2.0.21"
@@ -27,7 +30,9 @@ repositories {
 }
 
 dependencies {
-    implementation("redis.clients:jedis:4.0.1")
+    implementation("redis.clients:jedis:$jedis_version")
+    implementation("io.ktor:ktor-server-metrics-micrometer-jvm")
+    implementation("io.micrometer:micrometer-registry-prometheus:$prometheus_version")
     implementation("io.ktor:ktor-server-core-jvm")
     implementation("io.ktor:ktor-server-sessions-jvm")
     implementation("io.ktor:ktor-server-auth-jvm")
@@ -54,6 +59,8 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
     implementation("com.zaxxer:HikariCP:6.2.1")
     testImplementation("io.mockk:mockk:1.13.5")
+    implementation("org.apache.kafka:kafka-clients:3.2.0") // Or the latest Kafka version
+
 }
 
 

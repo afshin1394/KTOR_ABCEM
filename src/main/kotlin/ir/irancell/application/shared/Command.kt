@@ -1,4 +1,5 @@
 package ir.irancell.application.shared
 
-
-interface Command
+import kotlinx.serialization.Serializable
+@Serializable
+open class Command

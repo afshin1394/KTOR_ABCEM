@@ -2,21 +2,16 @@ package ir.irancell.infrastructure
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
 import ir.irancell.infrastructure.database.UsersTable
-import java.sql.Connection
+import kotlinx.coroutines.*
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.koin.core.context.GlobalContext.get
+import org.koin.core.qualifier.named
+import java.sql.SQLException
 
-enum class DatabaseType {
-      READONLY,
-      PRIMARY
-  }
-object DatabaseFactory {
+
+object DatabaseFactory  {
 
     fun init(
         jdbcUrl: String,
@@ -43,5 +38,52 @@ object DatabaseFactory {
             }
         }
     }
+    fun startDatabaseHealthCheck(onNeedRestart: (infraElement : InfraElement) -> Unit){
+        checkHealth(listOf(get().get<HikariDataSource>(named("writeDatabase")))){
+            onNeedRestart(InfraElement.WriteDataBase)
+        }
+        checkHealth(listOf(get().get<HikariDataSource>(named("readDatabase")))){
+            onNeedRestart(InfraElement.ReadDataBase)
+        }
+    }
+
+
+
+    @OptIn(DelicateCoroutinesApi::class)
+    fun checkHealth(hikariDataSources: List<HikariDataSource>,onNeedRestart : ()->Unit) {
+        GlobalScope.launch {
+            while (true) {
+                delay(5000) // Check every 5 seconds
+
+                hikariDataSources.forEachIndexed { index, hikariDataSource ->
+                    if (hikariDataSource.isAvailable()) {
+                        println("Database $index is available.")
+                    } else {
+                        onNeedRestart()
+                        println("Database $index not available. Attempting to reconnect...")
+                        // Optionally, restart the Koin module or take any necessary action
+                    }
+                }
+
+            }
+        }
+    }
+
+   private suspend fun HikariDataSource.isAvailable(): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                // Attempt a simple query or connection test
+                this@isAvailable.connection.use { connection ->
+                    // A simple test query to ensure the connection is valid
+                    return@use connection.isValid(2)  // Timeout 2 seconds
+                }
+            } catch (e: SQLException) {
+                false
+            }
+        }
+    }
+
+
+
 
 }

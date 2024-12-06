@@ -1,7 +1,7 @@
 package ir.irancell.infrastructure.database.repository_impl
 
 import ir.irancell.domain.models.UserDomain
-import ir.irancell.domain.repositories.write.IUserReadRepository
+import ir.irancell.domain.repositories.read.IUserReadRepository
 import ir.irancell.infrastructure.database.UsersTable
 import ir.irancell.infrastructure.shared.AbstractReadDatabaseRepository
 import ir.irancell.infrastructure.shared.DBQuery

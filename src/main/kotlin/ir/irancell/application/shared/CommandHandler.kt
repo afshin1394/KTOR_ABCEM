@@ -1,4 +1,7 @@
 package ir.irancell.application.shared
-interface CommandHandler<T : Command> {
-    suspend fun handle(command: T): Any
+interface CommandHandler<out T : Command> {
+    suspend fun handle(command:@UnsafeVariance T)
+    suspend fun deserializeCommand(json: String): T
+
 }
+

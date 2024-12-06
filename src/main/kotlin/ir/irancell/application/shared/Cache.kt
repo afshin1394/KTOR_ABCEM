@@ -7,7 +7,7 @@ import kotlinx.serialization.json.Json
 import redis.clients.jedis.Jedis
 import redis.clients.jedis.exceptions.JedisConnectionException
 
-class CacheUtil(private val redisClient: Jedis) {
+class InMemoryCaching(private val redisClient: Jedis) {
 
     fun <T> getOrPut(
         key: String,

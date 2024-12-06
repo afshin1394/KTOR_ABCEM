@@ -1,4 +1,4 @@
-package ir.irancell.di
+package ir.irancell.infrastructure.di
 
 import org.koin.dsl.module
 import org.slf4j.Logger

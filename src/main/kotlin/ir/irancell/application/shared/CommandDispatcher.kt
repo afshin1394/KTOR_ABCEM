@@ -1,19 +1,29 @@
 package ir.irancell.application.shared
 
+import kotlinx.serialization.json.Json
+import org.apache.kafka.clients.producer.KafkaProducer
+import org.apache.kafka.clients.producer.ProducerRecord
 import kotlin.reflect.KClass
 
-    class CommandDispatcher{
-        private val handlers: MutableMap<KClass<out Command>, CommandHandler<out Command>> = mutableMapOf()
+class CommandDispatcher(
+    private val kafkaProducer: KafkaProducer<String, String>,
+) {
 
+    private val handlers: MutableMap<String, CommandHandler<Command>> = mutableMapOf()
 
-        fun <T : Command> registerHandler(commandType: KClass<T>, handler: CommandHandler<T>) {
-            handlers[commandType] = handler
-        }
-
-        @Suppress("UNCHECKED_CAST")
-        suspend fun <C : Command> dispatch(command: C)   {
-            val handler = handlers[command::class] as? CommandHandler<C>
-                ?: throw IllegalArgumentException("No handler registered for ${command::class}")
-            handler.handle(command)
-        }
+    fun <C : Command> registerHandler(commandType: KClass<C>, handler: CommandHandler<C>) {
+        handlers[commandType.simpleName ?: error("Invalid command class name")] = handler
     }
+
+    fun getHandler(commandType: String): CommandHandler<Command>? {
+        return handlers[commandType]
+    }
+
+
+    suspend fun <C : Command> dispatch(command: C) {
+        val json = Json { ignoreUnknownKeys = true }
+        val jsonCommand = json.encodeToString(Command.serializer(), command)
+        kafkaProducer.send(ProducerRecord(Command::class.simpleName, command::class.simpleName, jsonCommand))
+
+    }
+}

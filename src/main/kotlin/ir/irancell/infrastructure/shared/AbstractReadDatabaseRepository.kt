@@ -21,11 +21,12 @@ abstract class AbstractReadDatabaseRepository<T : Any, ID>(
     override suspend fun findById(id: ID): T? = dbQuery.exec(
         serializer =  kSerializer,
         cacheKey = "findById:${table.tableName}",
+        ttlCache =  60,
     ) {
         table.selectAll().where { idColumn eq id }.mapNotNull { toEntity(it) }.single()
 
     }
-    override suspend fun findAll(): List<T> = dbQuery.exec(serializer = ListSerializer(kSerializer), cacheKey = "findAll${table.tableName}") {
+    override suspend fun findAll(): List<T> = dbQuery.exec(serializer = ListSerializer(kSerializer), cacheKey = "findAll${table.tableName}" , ttlCache =  60) {
         table.selectAll().map { toEntity(it) }?: emptyList()
     }
 }

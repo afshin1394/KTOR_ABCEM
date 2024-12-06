@@ -1,24 +1,29 @@
 package ir.irancell.infrastructure.shared
 
-import io.ktor.websocket.*
-import ir.irancell.application.shared.CacheUtil
+import ir.irancell.application.shared.InMemoryCaching
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.KSerializer
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.transactions.transaction
 
-class DBQuery(private val database: Database, private val cacheUtil: CacheUtil, private val ttlCache: Long) {
+class DBQuery(private val database: Database, private val inMemoryCaching: InMemoryCaching) {
 
-    suspend fun <T> exec(serializer: KSerializer<T>, cacheKey: String, block: () -> T): T {
-        // Run the database operation in a transaction
+     suspend fun <T> exec(hasCaching : Boolean = true,serializer: KSerializer<T>, cacheKey: String, ttlCache: Long, block: () -> T): T {
         return withContext(Dispatchers.IO) {
-            cacheUtil.getOrPut(cacheKey, ttlCache, serializer) {
+            if(hasCaching) {
+                inMemoryCaching.getOrPut(cacheKey, ttlCache, serializer) {
+                    transaction(database) {
+                        block()
+                    }
+                }
+            }else{
                 transaction(database) {
                     block()
                 }
             }
         }
+
     }
 }
 
