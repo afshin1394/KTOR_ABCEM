@@ -1,4 +1,4 @@
-package ir.irancell.application.shared
+package ir.irancell.infrastructure
 
 
 import kotlinx.serialization.KSerializer
@@ -41,8 +41,9 @@ class InMemoryCaching(private val redisClient: Jedis) {
 
         return result
     }
-
-
-
+    suspend fun invalidateCache(cacheKey: List<String>) {
+        // Delete the cache key to invalidate it
+        redisClient.del(*cacheKey.toTypedArray())
+    }
 }
 

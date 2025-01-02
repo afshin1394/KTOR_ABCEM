@@ -10,10 +10,13 @@ val kafka_version: String by project
 
 plugins {
     kotlin("jvm") version "2.0.21"
-    id("io.ktor.plugin") version "3.0.1"
+    id("io.ktor.plugin") version "3.0.2" // Update to the latest stable version
     id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21"
 }
-
+// Apply Shadow plugin manually after exclusions
+plugins.withId("io.ktor.plugin") {
+    apply(plugin = "com.github.johnrengelman.shadow")
+}
 
 group = "ir.irancell"
 version = "0.0.1"
@@ -60,7 +63,22 @@ dependencies {
     implementation("com.zaxxer:HikariCP:6.2.1")
     testImplementation("io.mockk:mockk:1.13.5")
     implementation("org.apache.kafka:kafka-clients:3.2.0") // Or the latest Kafka version
-
+    implementation ("io.github.cdimascio:java-dotenv:5.2.2")
+    implementation("io.ktor:ktor-client-cio-jvm")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
 }
+tasks {
+    // Configure the Shadow JAR task
+    named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+        archiveBaseName.set("abcem-all")
+        archiveClassifier.set("")
+        archiveVersion.set("")
+        mergeServiceFiles()
+    }
 
+    // Ensure the build task depends on the Shadow JAR
+    build {
+        dependsOn(shadowJar)
+    }
+}
 

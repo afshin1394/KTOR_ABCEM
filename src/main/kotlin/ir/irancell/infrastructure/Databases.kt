@@ -53,7 +53,7 @@ object DatabaseFactory  {
     fun checkHealth(hikariDataSources: List<HikariDataSource>,onNeedRestart : ()->Unit) {
         GlobalScope.launch {
             while (true) {
-                delay(5000) // Check every 5 seconds
+                delay(5000) // Check coEvery 5 seconds
 
                 hikariDataSources.forEachIndexed { index, hikariDataSource ->
                     if (hikariDataSource.isAvailable()) {

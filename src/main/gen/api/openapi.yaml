@@ -4,10 +4,9 @@ info:
   title: abcem API
   version: 1.0.0
 servers:
-- url: http://localhost/api/
-- url: https://localhost/api/
+- url: http://192.168.50.120:80
 paths:
-  /json/kotlinx-serialization:
+  /api/authorization/ipInfo:
     get:
       description: ""
       responses:
@@ -15,8 +14,79 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Map_String'
+                $ref: '#/components/schemas/IpInfoDTO'
           description: OK
+        "404":
+          content:
+            '*/*':
+              examples:
+                Example#1:
+                  value: no ip associated with address
+                Example#2:
+                  value: details not available
+              schema:
+                type: string
+          description: Not Found
+      x-accepts:
+      - '*/*'
+  /api/users/create:
+    post:
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+        required: true
+      responses:
+        "201":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: Created
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /api/users/getAll:
+    get:
+      description: ""
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/UserDTO'
+                type: array
+          description: OK
+      x-accepts:
+      - '*/*'
+  /api/users/insertAll:
+    post:
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/UserDTO'
+              type: array
+        required: true
+      responses:
+        "201":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: Created
+        "400":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: Bad Request
+      x-content-type: application/json
       x-accepts:
       - '*/*'
   /session/increment:
@@ -34,75 +104,39 @@ paths:
           description: OK
       x-accepts:
       - text/plain
-  /users/create:
-    post:
-      description: ""
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserRequestDTO'
-        required: true
-      responses:
-        "201":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/Unit'
-          description: Created
-      x-content-type: application/json
-      x-accepts:
-      - '*/*'
-  /users/insertAll:
-    post:
-      description: ""
-      requestBody:
-        content:
-          application/json:
-            schema:
-              items:
-                $ref: '#/components/schemas/UserRequestDTO'
-              type: array
-        required: true
-      responses:
-        "201":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/Unit'
-          description: Created
-        "400":
-          content:
-            '*/*':
-              schema:
-                type: string
-          description: Bad Request
-      x-content-type: application/json
-      x-accepts:
-      - '*/*'
-  /users/salam:
-    get:
-      description: ""
-      responses:
-        "200":
-          content:
-            text/plain:
-              examples:
-                Example#1:
-                  value: salam
-              schema:
-                type: string
-          description: OK
-      x-accepts:
-      - text/plain
 components:
   schemas:
-    Map:
-      properties: {}
-      type: object
-    Map_String:
-      type: string
-    UserRequestDTO:
+    IpInfoDTO:
+      example:
+        country: country
+        loc: loc
+        hostname: hostname
+        city: city
+        org: org
+        timezone: timezone
+        ip: ip
+        postal: postal
+        region: region
+      properties:
+        ip:
+          type: string
+        hostname:
+          type: string
+        city:
+          type: string
+        region:
+          type: string
+        country:
+          type: string
+        loc:
+          type: string
+        org:
+          type: string
+        postal:
+          type: string
+        timezone:
+          type: string
+    UserDTO:
       example:
         name: name
         age: 0
@@ -114,7 +148,4 @@ components:
           type: integer
       required:
       - name
-    Unit:
-      properties: {}
-      type: object
 

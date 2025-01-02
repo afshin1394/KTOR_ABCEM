@@ -4,22 +4,29 @@ info:
   description: "abcem API"
   version: "1.0.0"
 servers:
-  - url: "http://localhost"
-  - url: "https://localhost"
+  - url: "http://192.168.50.120:80"
 paths:
-  /session/increment:
+  /api/authorization/ipInfo:
     get:
       description: ""
       responses:
         "200":
           description: "OK"
           content:
-            text/plain:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/IpInfoDTO"
+        "404":
+          description: "Not Found"
+          content:
+            '*/*':
               schema:
                 type: "string"
               examples:
                 Example#1:
-                  value: ""
+                  value: "no ip associated with address"
+                Example#2:
+                  value: "details not available"
   /api/users/create:
     post:
       description: ""
@@ -35,7 +42,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/Unit"
+                type: "string"
   /api/users/getAll:
     get:
       description: ""
@@ -65,15 +72,49 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/Unit"
+                type: "string"
         "400":
           description: "Bad Request"
           content:
             '*/*':
               schema:
                 type: "string"
+  /session/increment:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            text/plain:
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: ""
 components:
   schemas:
+    IpInfoDTO:
+      type: "object"
+      properties:
+        ip:
+          type: "string"
+        hostname:
+          type: "string"
+        city:
+          type: "string"
+        region:
+          type: "string"
+        country:
+          type: "string"
+        loc:
+          type: "string"
+        org:
+          type: "string"
+        postal:
+          type: "string"
+        timezone:
+          type: "string"
     UserDTO:
       type: "object"
       properties:
@@ -84,6 +125,3 @@ components:
           format: "int32"
       required:
       - "name"
-    Unit:
-      type: "object"
-      properties: {}

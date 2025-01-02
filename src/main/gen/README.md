@@ -2,7 +2,7 @@
 
 abcem API
 - API version: 1.0.0
-  - Build date: 2024-11-25T02:26:31.289234-08:00[America/Los_Angeles]
+  - Build date: 2025-01-02T07:06:00.936846-08:00[America/Los_Angeles]
   - Generator version: 7.7.0
 
 abcem API
@@ -90,14 +90,14 @@ import org.openapitools.client.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost/api");
+    defaultClient.setBasePath("http://192.168.50.120:80");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
     try {
-      String result = apiInstance.jsonKotlinxSerializationGet();
+      IpInfoDTO result = apiInstance.apiAuthorizationIpInfoGet();
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling DefaultApi#jsonKotlinxSerializationGet");
+      System.err.println("Exception when calling DefaultApi#apiAuthorizationIpInfoGet");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -110,20 +110,21 @@ public class Example {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://192.168.50.120:80*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DefaultApi* | [**jsonKotlinxSerializationGet**](docs/DefaultApi.md#jsonKotlinxSerializationGet) | **GET** /json/kotlinx-serialization | 
+*DefaultApi* | [**apiAuthorizationIpInfoGet**](docs/DefaultApi.md#apiAuthorizationIpInfoGet) | **GET** /api/authorization/ipInfo | 
+*DefaultApi* | [**apiUsersCreatePost**](docs/DefaultApi.md#apiUsersCreatePost) | **POST** /api/users/create | 
+*DefaultApi* | [**apiUsersGetAllGet**](docs/DefaultApi.md#apiUsersGetAllGet) | **GET** /api/users/getAll | 
+*DefaultApi* | [**apiUsersInsertAllPost**](docs/DefaultApi.md#apiUsersInsertAllPost) | **POST** /api/users/insertAll | 
 *DefaultApi* | [**sessionIncrementGet**](docs/DefaultApi.md#sessionIncrementGet) | **GET** /session/increment | 
-*DefaultApi* | [**usersCreatePost**](docs/DefaultApi.md#usersCreatePost) | **POST** /users/create | 
-*DefaultApi* | [**usersInsertAllPost**](docs/DefaultApi.md#usersInsertAllPost) | **POST** /users/insertAll | 
-*DefaultApi* | [**usersSalamGet**](docs/DefaultApi.md#usersSalamGet) | **GET** /users/salam | 
 
 
 ## Documentation for Models
 
- - [UserRequestDTO](docs/UserRequestDTO.md)
+ - [IpInfoDTO](docs/IpInfoDTO.md)
+ - [UserDTO](docs/UserDTO.md)
 
 
 <a id="documentation-for-authorization"></a>

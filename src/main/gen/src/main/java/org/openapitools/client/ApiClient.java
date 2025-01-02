@@ -61,15 +61,10 @@ import org.openapitools.client.auth.ApiKeyAuth;
  */
 public class ApiClient {
 
-    private String basePath = "http://localhost/api";
+    private String basePath = "http://192.168.50.120:80";
     protected List<ServerConfiguration> servers = new ArrayList<ServerConfiguration>(Arrays.asList(
     new ServerConfiguration(
-      "http://localhost/api",
-      "No description provided",
-      new HashMap<String, ServerVariable>()
-    ),
-    new ServerConfiguration(
-      "https://localhost/api",
+      "http://192.168.50.120:80",
       "No description provided",
       new HashMap<String, ServerVariable>()
     )
@@ -161,7 +156,7 @@ public class ApiClient {
     /**
      * Set base path
      *
-     * @param basePath Base path of the URL (e.g http://localhost/api
+     * @param basePath Base path of the URL (e.g http://192.168.50.120:80
      * @return An instance of OkHttpClient
      */
     public ApiClient setBasePath(String basePath) {

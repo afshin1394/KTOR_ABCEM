@@ -1,8 +1,6 @@
 package ir.irancell.application.configurations
 
-import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.application.*
-import io.ktor.server.metrics.micrometer.*
 import io.ktor.server.plugins.calllogging.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
@@ -16,6 +14,15 @@ fun Application.configureMonitoring() {
     install(CallLogging) {
         level = Level.INFO
         filter { call -> call.request.path().startsWith("/") }
+        format { call ->
+            val xRealIp = call.request.headers["X-Real-IP"] ?: "N/A"
+            val xForwardedFor = call.request.headers["X-Forwarded-For"] ?: "N/A"
+            val xForwardedProto = call.request.headers["X-Forwarded-Proto"] ?: "N/A"
+            val xForwardedHost = call.request.headers["X-Forwarded-Host"] ?: "N/A"
+
+            "Request Headers - X-Real-IP: $xRealIp, X-Forwarded-For: $xForwardedFor, X-Forwarded-Proto: $xForwardedProto, X-Forwarded-Host: $xForwardedHost"
+        }
+
     }
 //    val appMicrometerRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
 //    install(MicrometerMetrics) {

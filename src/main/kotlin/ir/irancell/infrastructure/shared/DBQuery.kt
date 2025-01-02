@@ -1,6 +1,6 @@
 package ir.irancell.infrastructure.shared
 
-import ir.irancell.application.shared.InMemoryCaching
+import ir.irancell.infrastructure.InMemoryCaching
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.KSerializer
@@ -23,7 +23,6 @@ class DBQuery(private val database: Database, private val inMemoryCaching: InMem
                 }
             }
         }
-
     }
 }
 

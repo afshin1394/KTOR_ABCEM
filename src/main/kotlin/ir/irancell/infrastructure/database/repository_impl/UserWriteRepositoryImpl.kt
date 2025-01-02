@@ -4,17 +4,15 @@ import ir.irancell.domain.models.UserDomain
 import ir.irancell.domain.repositories.write.IUserWriteRepository
 import ir.irancell.infrastructure.database.UsersTable
 import ir.irancell.infrastructure.shared.AbstractWriteDatabaseRepository
-import ir.irancell.infrastructure.shared.dbTransaction
-import org.jetbrains.exposed.sql.Database
+import ir.irancell.infrastructure.shared.DBCommand
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.batchInsert
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.statements.InsertStatement
-import org.jetbrains.exposed.sql.transactions.transaction
 import java.util.*
 
-class UserWriteRepositoryImpl(private val writeDatabase: Database) : AbstractWriteDatabaseRepository<UserDomain, UUID>(
-    database = writeDatabase,
+class UserWriteRepositoryImpl(private val dbCommand: DBCommand) : AbstractWriteDatabaseRepository<UserDomain, UUID>(
+    dbCommand = dbCommand,
     table = UsersTable,
     idColumn = UsersTable.id
 ),
@@ -36,12 +34,13 @@ class UserWriteRepositoryImpl(private val writeDatabase: Database) : AbstractWri
 
     override suspend fun batchInsert(users: List<UserDomain>) {
 
-        dbTransaction(database = writeDatabase) {
+        dbCommand.exec {
             UsersTable.batchInsert(
                 data = users,
                 ignore = false,
                 shouldReturnGeneratedValues = false
-            ) {user->
+            ) {
+                user->
                 this[UsersTable.name] = user.name
                 this[UsersTable.age] = user.age
             }
